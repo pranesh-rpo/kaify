@@ -1,14 +1,14 @@
 services:
   kaify-testing-host:
     init: true
-    image: "ghcr.io/coollabsio/coolify-testing-host:latest"
+    image: "ghcr.io/pranesh-rpo/kaify-testing-host:latest"
     pull_policy: always
     container_name: kaify-testing-host
     volumes:
       - //var/run/docker.sock://var/run/docker.sock
       - ./:/data/kaify
   kaify:
-    image: "ghcr.io/coollabsio/coolify:latest"
+    image: "ghcr.io/pranesh-rpo/kaify:latest"
     pull_policy: always
     container_name: kaify
     restart: always
@@ -96,7 +96,7 @@ services:
       retries: 10
       timeout: 2s
   soketi:
-    image: 'ghcr.io/coollabsio/coolify-realtime:1.0.10'
+    image: 'ghcr.io/pranesh-rpo/kaify-realtime:1.0.10'
     pull_policy: always
     container_name: kaify-realtime
     restart: always
