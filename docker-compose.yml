@@ -1,0 +1,37 @@
+services:
+    kaify:
+        container_name: kaify
+        restart: always
+        working_dir: /var/www/html
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        networks:
+            - kaify
+        depends_on:
+            - postgres
+            - redis
+            - soketi
+    postgres:
+        image: postgres:15-alpine
+        container_name: kaify-db
+        restart: always
+        networks:
+            - kaify
+    redis:
+        image: redis:7-alpine
+        container_name: kaify-redis
+        restart: always
+        networks:
+            - kaify
+    soketi:
+        container_name: kaify-realtime
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        restart: always
+        networks:
+            - kaify
+networks:
+    kaify:
+        name: kaify
+        driver: bridge
+        external: false
