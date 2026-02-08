@@ -77,7 +77,7 @@ RUN apk add --no-cache gnupg && \
 RUN --mount=type=cache,target=/var/cache/apk \
     apk upgrade && \
     apk add --no-cache \
-    postgresql${POSTGRES_VERSION}-client \
+    postgresql-client \
     openssh-client \
     git \
     git-lfs \
