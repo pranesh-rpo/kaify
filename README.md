@@ -1,172 +1,253 @@
 <div align="center">
 
 # Kaify
-An open-source & self-hostable Docker management platform - Heroku / Netlify / Vercel alternative.
+
+An open-source & self-hostable platform for deploying applications, databases, and services on your own servers.
+
+A Heroku / Netlify / Vercel alternative.
 
 </div>
 
-## About the Project
+## About
 
-Kaify is an open-source & self-hostable Docker management platform that combines the best features of Coolify, CapRover, and Portainer.
-
-It helps you manage your servers, applications, and databases on your own hardware; you only need an SSH connection. You can manage VPS, Bare Metal, Raspberry PIs, and anything else.
+Kaify is an open-source & self-hostable Docker management platform. It helps you manage your servers, applications, and databases on your own hardware — you only need an SSH connection. You can manage VPS, Bare Metal, Raspberry PIs, and anything else.
 
 Imagine having the ease of a cloud but with your own servers. That is **Kaify**.
 
-No vendor lock-in, which means that all the configurations for your applications/databases/etc are saved to your server. So, if you decide to stop using Kaify, you could still manage your running resources. You lose the automations and all the magic. 🪄️
+No vendor lock-in. All configurations for your applications, databases, and services are saved to your server. If you decide to stop using Kaify, you can still manage your running resources.
 
-## Quick Start
+## Features
 
-Install Kaify with a single command:
+- **Application Deployment** — Git-based deployments with automatic builds
+- **Database Management** — PostgreSQL, MySQL, MongoDB, Redis, and more
+- **Docker Compose Services** — Deploy any Docker Compose stack
+- **Domain & SSL** — Automatic HTTPS with Let's Encrypt
+- **Server Management** — Manage multiple remote servers via SSH
+- **Team Collaboration** — Multi-tenant with role-based access control
+- **Monitoring** — Real-time container metrics, logs, and health checks
+- **Backups** — Automated database backups with configurable schedules
+- **Auto-Updates** — Kaify keeps itself up to date automatically
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/setup.sh | sudo bash
-```
+## Requirements
 
-Or use the full installer directly:
+- A **Linux server** (see [supported operating systems](#supported-operating-systems))
+- Minimum **2 CPU cores**
+- Minimum **2 GB RAM**
+- Minimum **30 GB disk space** (20 GB free)
+- **Root or sudo access**
+- Supported architectures: **AMD64**, **ARM64**
+
+> **Important:** Kaify installs on Linux servers only. macOS and Windows are not supported as host operating systems.
+
+## Installation
+
+SSH into your Linux server and run:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/install.sh | sudo bash
 ```
 
-> [!NOTE]
-> Requires a Linux server with root access. See the installation documentation for more information.
+The installer will:
 
-## Features
+1. Install required packages (curl, wget, git, jq, openssl)
+2. Configure OpenSSH server
+3. Install and configure Docker
+4. Set up Docker network address pools
+5. Download Kaify configuration files
+6. Generate environment variables and secrets
+7. Set up SSH keys for localhost access
+8. Pull and start all containers
 
-- 🐳 **Container Management** - Full Docker container lifecycle management
-- 🚀 **Application Deployment** - Git-based deployments with automatic builds
-- 🗄️ **Database Management** - PostgreSQL, MySQL, MongoDB, Redis support
-- 🔒 **Security** - Team-based access control and RBAC
-- 🌐 **Domain & SSL** - Automatic SSL/HTTPS with Let's Encrypt
-- 📊 **Monitoring** - Real-time container metrics and logs
-- 👥 **Teams** - Multi-tenant team organization
+Once complete, access Kaify at `http://<your-server-ip>:8000`.
 
-## Donations
-To stay completely free and open-source, with no feature behind the paywall and evolve the project, we need your help. If you like Coolify, please consider donating to help us fund the project's future development.
+### Install a Specific Version
 
-[coolify.io/sponsorships](https://coolify.io/sponsorships)
+```bash
+curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/install.sh | sudo bash -s v4.0.0-beta.462
+```
 
-Thank you so much!
+### Pre-configure Root User
 
-### Big Sponsors
+Skip the initial setup screen by providing credentials during installation:
 
-* [23M](https://23m.com?ref=coolify.io) - Your experts for high-availability hosting solutions!
-* [Algora](https://algora.io?ref=coolify.io) - Open source contribution platform
-* [American Cloud](https://americancloud.com?ref=coolify.io) - US-based cloud infrastructure services
-* [Arcjet](https://arcjet.com?ref=coolify.io) - Advanced web security and performance solutions
-* [BC Direct](https://bc.direct?ref=coolify.io) - Your trusted technology consulting partner
-* [Blacksmith](https://blacksmith.sh?ref=coolify.io) - Infrastructure automation platform
-* [Brand.dev](https://brand.dev?ref=coolify.io) - API to personalize your product with logos, colors, and company info from any domain
-* [ByteBase](https://www.bytebase.com?ref=coolify.io) - Database CI/CD and Security at Scale
-* [CodeRabbit](https://coderabbit.ai?ref=coolify.io) - Cut Code Review Time & Bugs in Half
-* [COMIT](https://comit.international?ref=coolify.io) - New York Times award–winning contractor
-* [CompAI](https://www.trycomp.ai?ref=coolify.io) - Open source compliance automation platform
-* [Convex](https://convex.link/coolify.io) - Open-source reactive database for web app developers
-* [CubePath](https://cubepath.com/?ref=coolify.io) - Dedicated Servers & Instant Deploy
-* [Dade2](https://dade2.net/?ref=coolify.io) - IT Consulting, Cloud Solutions & System Integration
-* [Formbricks](https://formbricks.com?ref=coolify.io) - The open source feedback platform
-* [GoldenVM](https://billing.goldenvm.com?ref=coolify.io) - Premium virtual machine hosting solutions
-* [Hetzner](http://htznr.li/CoolifyXHetzner) - Server, cloud, hosting, and data center solutions
-* [Hostinger](https://www.hostinger.com/vps/coolify-hosting?ref=coolify.io) - Web hosting and VPS solutions
-* [JobsCollider](https://jobscollider.com/remote-jobs?ref=coolify.io) - 30,000+ remote jobs for developers
-* [Juxtdigital](https://juxtdigital.com?ref=coolify.io) - Digital PR & AI Authority Building Agency
-* [LiquidWeb](https://liquidweb.com?ref=coolify.io) - Premium managed hosting solutions
-* [Logto](https://logto.io?ref=coolify.io) - The better identity infrastructure for developers
-* [Macarne](https://macarne.com?ref=coolify.io) - Best IP Transit & Carrier Ethernet Solutions for Simplified Network Connectivity
-* [Mobb](https://vibe.mobb.ai/?ref=coolify.io) - Secure Your AI-Generated Code to Unlock Dev Productivity
-* [PFGLabs](https://pfglabs.com?ref=coolify.io) - Build Real Projects with Golang
-* [Ramnode](https://ramnode.com/?ref=coolify.io) - High Performance Cloud VPS Hosting
-* [SaasyKit](https://saasykit.com?ref=coolify.io) - Complete SaaS starter kit for developers
-* [SupaGuide](https://supa.guide?ref=coolify.io) - Your comprehensive guide to Supabase
-* [Supadata AI](https://supadata.ai/?ref=coolify.io) - Scrape YouTube, web, and files. Get AI-ready, clean data
-* [Syntax.fm](https://syntax.fm?ref=coolify.io) - Podcast for web developers
-* [Tigris](https://www.tigrisdata.com?ref=coolify.io) - Modern developer data platform
-* [Tolgee](https://tolgee.io?ref=coolify.io) - The open source localization platform
-* [Ubicloud](https://www.ubicloud.com?ref=coolify.io) - Open source cloud infrastructure platform
+```bash
+ROOT_USERNAME=admin \
+ROOT_USER_EMAIL=admin@example.com \
+ROOT_USER_PASSWORD=your-secure-password \
+  curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/install.sh | sudo bash
+```
 
+### Custom Docker Network Pool
 
-### Small Sponsors
+```bash
+DOCKER_ADDRESS_POOL_BASE=172.16.0.0/12 \
+DOCKER_ADDRESS_POOL_SIZE=24 \
+  curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/install.sh | sudo bash
+```
 
-<a href="https://open-elements.com/?utm_source=coolify.io"><img width="60px" alt="OpenElements" src="https://github.com/OpenElements.png"/></a>
-<a href="https://xaman.app/?utm_source=coolify.io"><img width="60px" alt="XamanApp" src="https://github.com/XamanApp.png"/></a>
-<a href="https://www.uxwizz.com/?utm_source=coolify.io"><img width="60px" alt="UXWizz" src="https://github.com/UXWizz.png"/></a>
-<a href="https://evercam.io/?utm_source=coolify.io"><img width="60px" alt="Evercam" src="https://github.com/evercam.png"/></a>
-<a href="https://github.com/iujlaki"><img width="60px" alt="Imre Ujlaki" src="https://github.com/iujlaki.png"/></a>
-<a href="https://bsky.app/profile/jyc.dev"><img width="60px" alt="jyc.dev" src="https://github.com/jycouet.png"/></a>
-<a href="https://github.com/therealjp?utm_source=coolify.io"><img width="60px" alt="TheRealJP" src="https://github.com/therealjp.png"/></a>
-<a href="https://360creators.com/?utm_source=coolify.io"><img width="60px" alt="360Creators" src="https://opencollective-production.s3.us-west-1.amazonaws.com/account-avatar/503e0953-bff7-4296-b4cc-5e36d40eecc0/icon-360creators.png"/></a>
-<a href="https://github.com/aniftyco"><img width="60px" alt="NiftyCo" src="https://github.com/aniftyco.png"/></a>
-<a href="https://dry.software/?utm_source=coolify.io"><img width="60px" alt="Dry Software" src="https://github.com/dry-software.png"/></a>
-<a href="https://lightspeed.run/?utm_source=coolify.io"><img width="60px" alt="Lightspeed.run" src="https://github.com/lightspeedrun.png"/></a>
-<a href="https://linkdr.com?utm_source=coolify.io"><img width="60px" alt="LinkDr" src="https://github.com/LLM-Inc.png"/></a>
-<a href="http://gravitywiz.com/?utm_source=coolify.io"><img width="60px" alt="Gravity Wiz" src="https://github.com/gravitywiz.png"/></a>
-<a href="https://bitlaunch.io/?utm_source=coolify.io"><img width="60px" alt="BitLaunch" src="https://github.com/bitlaunchio.png"/></a>
-<a href="https://bestforandroid.com/?utm_source=coolify.io"><img width="60px" alt="Best for Android" src="https://github.com/bestforandroid.png"/></a>
-<a href="https://il.ly/?utm_source=coolify.io"><img width="60px" alt="Ilias Ism" src="https://github.com/Illyism.png"/></a>
-<a href="https://formbricks.com/?utm_source=coolify.io"><img width="60px" alt="Formbricks" src="https://github.com/formbricks.png"/></a>
-<a href="https://www.serversearcher.com/"><img width="60px" alt="Server Searcher" src="https://github.com/serversearcher.png"/></a>
-<a href="https://www.reshot.ai/?utm_source=coolify.io"><img width="60px" alt="Reshot" src="https://coolify.io/images/reshotai.png"/></a>
-<a href="https://cirun.io/?utm_source=coolify.io"><img width="60px" alt="Cirun" src="https://coolify.io/images/cirun-logo.png"/></a>
-<a href="https://typebot.io/?utm_source=coolify.io"><img width="60px" alt="Typebot" src="https://cdn.bsky.app/img/avatar/plain/did:plc:gwxcta3pccyim4z5vuultdqx/bafkreig23hci7e2qpdxicsshnuzujbcbcgmydxhbybkewszdezhdodv42m@jpeg"/></a>
-<a href="https://cccareers.org/?utm_source=coolify.io"><img width="60px" alt="Creating Coding Careers" src="https://github.com/cccareers.png"/></a>
-<a href="https://internetgarden.co/?utm_source=coolify.io"><img width="60px" alt="Internet Garden" src="https://coolify.io/images/internetgarden.ico"/></a>
-<a href="https://web3.career/?utm_source=coolify.io"><img width="60px" alt="Web3 Jobs" src="https://coolify.io/images/web3jobs.png"/></a>
-<a href="https://codext.link/coolify-io?utm_source=coolify.io"><img width="60px" alt="Codext" src="https://coolify.io/images/codext.jpg"/></a>
-<a href="https://github.com/monocursive"><img width="60px" alt="Michael Mazurczak" src="https://github.com/monocursive.png"/></a>
-<a href="https://fider.io/?utm_source=coolify.io"><img width="60px" alt="Fider" src="https://github.com/getfider.png"/></a>
-<a href="https://www.flint.sh/en/home?utm_source=coolify.io"><img width="60px" alt="Flint" src="https://github.com/Flint-company.png"/></a>
-<a href="https://github.com/urtho"><img width="60px" alt="Paweł Pierścionek" src="https://github.com/urtho.png"/></a>
-<a href="https://www.runpod.io/?utm_source=coolify.io"><img width="60px" alt="RunPod" src="https://coolify.io/images/runpod.svg"/></a>
-<a href="https://dartnode.com/?utm_source=coolify.io"><img width="60px" alt="DartNode" src="https://github.com/dartnode.png"/></a>
-<a href="https://github.com/whitesidest"><img width="60px" alt="Tyler Whitesides" src="https://avatars.githubusercontent.com/u/12365916?s=52&v=4"/></a>
-<a href="https://serpapi.com/?utm_source=coolify.io"><img width="60px" alt="SerpAPI" src="https://github.com/serpapi.png"/></a>
-<a href="https://aquarela.io"><img width="60px" alt="Aquarela" src="https://github.com/aquarela-io.png"/></a>
-<a href="https://cryptojobslist.com/?utm_source=coolify.io"><img width="60px" alt="Crypto Jobs List" src="https://github.com/cryptojobslist.png"/></a>
-<a href="https://www.youtube.com/@AlfredNutile?utm_source=coolify.io"><img width="60px" alt="Alfred Nutile" src="https://github.com/alnutile.png"/></a>
-<a href="https://startupfa.me?utm_source=coolify.io"><img width="60px" alt="Startup Fame" src="https://github.com/startupfame.png"/></a>
-<a href="https://barrad.me/?utm_source=coolify.io"><img width="60px" alt="Younes Barrad" src="https://github.com/Flowko.png"/></a>
-<a href="https://jonasjaeger.com?utm_source=coolify.io"><img width="60px" alt="Jonas Jaeger" src="https://github.com/toxin20.png"/></a>
-<a href="https://pixel.ao/?utm_source=coolify.io"><img width="60px" alt="Pixel Infinito" src="https://github.com/pixelinfinito.png"/></a>
-<a href="https://github.com/corentinclichy"><img width="60px" alt="Corentin Clichy" src="https://github.com/corentinclichy.png"/></a>
-<a href="https://x.com/mrsmith9ja?utm_source=coolify.io"><img width="60px" alt="Thompson Edolo" src="https://github.com/verygreenboi.png"/></a>
-<a href="https://devhuset.no?utm_source=coolify.io"><img width="60px" alt="Devhuset" src="https://github.com/devhuset.png"/></a>
-<a href="https://arvensis.systems/?utm_source=coolify.io"><img width="60px" alt="Arvensis Systems" src="https://coolify.io/images/arvensis.png"/></a>
-<a href="https://github.com/Niki2k1"><img width="60px" alt="Niklas Lausch" src="https://github.com/Niki2k1.png"/></a>
-<a href="https://capgo.app/?utm_source=coolify.io"><img width="60px" alt="Cap-go" src="https://github.com/cap-go.png"/></a>
-<a href="https://interviewpal.com/?utm_source=coolify.io"><img width="60px" alt="InterviewPal" src="/public/svgs/interviewpal.svg"/></a>
-<a href="https://transcript.lol/?utm_source=coolify.io"><img width="60px" alt="Transcript LOL" src="https://transcript.lol/logo.png"/></a>
+### Custom Registry URL
 
+```bash
+REGISTRY_URL=your-registry.example.com \
+  curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/install.sh | sudo bash
+```
 
-...and many more at [GitHub Sponsors](https://github.com/sponsors/coollabsio)
+### Disable Auto-Updates
 
-## Recognitions
+```bash
+AUTOUPDATE=false \
+  curl -fsSL https://raw.githubusercontent.com/pranesh-rpo/kaify/main/scripts/install.sh | sudo bash
+```
 
-<p>
-<a href="https://news.ycombinator.com/item?id=26624341">
-  <img
-    style="width: 250px; height: 54px;" width="250" height="54"
-    alt="Featured on Hacker News"
-    src="https://hackernews-badge.vercel.app/api?id=26624341"
-  />
-</a>
-</p>
+## Configuration
 
-<a href="https://www.producthunt.com/posts/coolify?ref=badge-featured&utm_medium=badge&utm_souce=badge-coolify" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=338273&theme=light" alt="Coolify - An&#0032;open&#0045;source&#0032;&#0038;&#0032;self&#0045;hostable&#0032;Heroku&#0044;&#0032;Netlify&#0032;alternative | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+All configuration is stored in `/data/kaify/source/.env`.
 
-<a href="https://trendshift.io/repositories/634" target="_blank"><img src="https://trendshift.io/api/badge/repositories/634" alt="coollabsio%2Fcoolify | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+| Variable | Description | Default |
+|---|---|---|
+| `ROOT_USERNAME` | Root user username | *(set during first login)* |
+| `ROOT_USER_EMAIL` | Root user email | *(set during first login)* |
+| `ROOT_USER_PASSWORD` | Root user password | *(set during first login)* |
+| `APP_PORT` | Port Kaify listens on | `8000` |
+| `SOKETI_PORT` | WebSocket server port | `6001` |
+| `DOCKER_ADDRESS_POOL_BASE` | Docker network pool base | `10.0.0.0/8` |
+| `DOCKER_ADDRESS_POOL_SIZE` | Docker network pool size | `24` |
+| `DOCKER_POOL_FORCE_OVERRIDE` | Force override existing Docker pool config | `false` |
+| `AUTOUPDATE` | Enable auto-updates | `true` |
+| `REGISTRY_URL` | Docker image registry URL | `ghcr.io` |
 
-## Core Maintainers
+## Architecture
 
-| Andras Bacsai | 🏔️ Peak |
-|------------|------------|
-| <img src="https://github.com/andrasbacsai.png" width="200px" alt="Andras Bacsai" /> | <img src="https://github.com/peaklabs-dev.png" width="200px" alt="peaklabs-dev" /> |
-| <a href="https://github.com/andrasbacsai"><img src="https://api.iconify.design/devicon:github.svg" width="25px"></a> <a href="https://x.com/heyandras"><img src="https://api.iconify.design/devicon:twitter.svg" width="25px"></a> <a href="https://bsky.app/profile/heyandras.dev"><img src="https://api.iconify.design/simple-icons:bluesky.svg" width="25px"></a> | <a href="https://github.com/peaklabs-dev"><img src="https://api.iconify.design/devicon:github.svg" width="25px"></a> <a href="https://x.com/peaklabs_dev"><img src="https://api.iconify.design/devicon:twitter.svg" width="25px"></a> <a href="https://bsky.app/profile/peaklabs.dev"><img src="https://api.iconify.design/simple-icons:bluesky.svg" width="25px"></a> |
+Kaify runs as a set of Docker containers:
 
-## Repo Activity
+| Container | Image | Description |
+|---|---|---|
+| `kaify` | `ghcr.io/pranesh-rpo/kaify` | Main application (Laravel + PHP) |
+| `kaify-db` | `postgres:15-alpine` | PostgreSQL database |
+| `kaify-redis` | `redis:7-alpine` | Redis cache and queue |
+| `kaify-realtime` | `ghcr.io/pranesh-rpo/kaify-realtime` | Soketi WebSocket server |
 
-![Alt](https://repobeats.axiom.co/api/embed/eab1c8066f9c59d0ad37b76c23ebb5ccac4278ae.svg "Repobeats analytics image")
+### Data Directory
 
-## Star History
+All persistent data is stored in `/data/kaify/`:
 
-[![Star History Chart](https://api.star-history.com/svg?repos=coollabsio/coolify&type=Date)](https://star-history.com/#coollabsio/coolify&Date)
+```
+/data/kaify/
+├── source/          # Configuration files (.env, docker-compose)
+├── ssh/             # SSH keys for server connections
+│   ├── keys/        # Private keys
+│   └── mux/         # SSH multiplexing sockets
+├── applications/    # Deployed application data
+├── databases/       # Database storage
+├── backups/         # Backup files
+├── services/        # Service data
+├── proxy/           # Proxy configuration
+│   └── dynamic/     # Dynamic proxy rules
+└── sentinel/        # Sentinel monitoring
+```
+
+## Upgrading
+
+Kaify auto-updates by default. To manually upgrade:
+
+```bash
+sudo bash /data/kaify/source/upgrade.sh
+```
+
+Upgrade to a specific version:
+
+```bash
+sudo bash /data/kaify/source/upgrade.sh v4.0.0-beta.462
+```
+
+Upgrade logs are stored at `/data/kaify/source/upgrade-*.log`.
+
+### Custom Docker Compose
+
+To customize the Docker Compose configuration without losing changes on upgrades, create:
+
+```
+/data/kaify/source/docker-compose.custom.yml
+```
+
+This file is automatically merged during upgrades.
+
+## Backup
+
+Back up your environment file to a safe location **outside the server** (e.g., a password manager):
+
+```bash
+cat /data/kaify/source/.env
+```
+
+This file contains all secrets and credentials needed to restore your Kaify instance.
+
+## Troubleshooting
+
+### Check container status
+
+```bash
+docker ps -a | grep kaify
+```
+
+### View application logs
+
+```bash
+docker logs kaify
+```
+
+### Check container health
+
+```bash
+docker inspect --format='{{.State.Health.Status}}' kaify
+```
+
+### View installation logs
+
+```bash
+ls -la /data/kaify/source/installation-*.log
+```
+
+### View upgrade logs
+
+```bash
+ls -la /data/kaify/source/upgrade-*.log
+```
+
+### SSH connectivity issues
+
+If Kaify cannot connect to servers:
+
+1. Verify `PermitRootLogin` is set to `yes`, `without-password`, or `prohibit-password` in `/etc/ssh/sshd_config`
+2. Check that SSH keys exist at `/data/kaify/ssh/keys/`
+3. Restart the SSH service: `systemctl restart sshd`
+
+### Docker installed via Snap
+
+Kaify does not support Docker installed via Snap. Remove it first:
+
+```bash
+snap remove docker
+```
+
+Then re-run the installer.
+
+## Supported Operating Systems
+
+| Distribution | Notes |
+|---|---|
+| Ubuntu 20.04+ | Recommended |
+| Debian 11+ | |
+| CentOS 8+ | |
+| Fedora | |
+| RHEL / Rocky Linux / AlmaLinux | |
+| Arch Linux | Including Manjaro, EndeavourOS, CachyOS |
+| Alpine Linux | Including postmarketOS |
+| openSUSE Leap / Tumbleweed | |
+| SLES | |
+| Amazon Linux 2023 | |
+| Raspbian | For Raspberry Pi |
+
+## License
+
+Open source. See [LICENSE](LICENSE) for details.
