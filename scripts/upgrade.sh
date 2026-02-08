@@ -155,7 +155,7 @@ echo "3/6 Pulling Docker images..."
 echo "     This may take a few minutes depending on your connection."
 
 # Also pull the helper image (not in compose files but needed for upgrade)
-HELPER_IMAGE="${REGISTRY_URL:-ghcr.io}/pranesh-rpo/kaify-helper:${LATEST_HELPER_VERSION}"
+HELPER_IMAGE="${REGISTRY_URL:-ghcr.io}/coollabsio/coolify-helper:${LATEST_HELPER_VERSION}"
 echo "     - Pulling $HELPER_IMAGE..."
 log "Pulling image: $HELPER_IMAGE"
 if docker pull "$HELPER_IMAGE" >>"$LOGFILE" 2>&1; then
@@ -239,11 +239,11 @@ nohup bash -c "
     if [ -f /data/kaify/source/docker-compose.custom.yml ]; then
         log 'Using custom docker-compose.yml'
         log 'Running docker compose up with custom configuration...'
-        docker run -v /data/kaify/source:/data/kaify/source -v /var/run/docker.sock:/var/run/docker.sock \${DOCKER_CONFIG_MOUNT} --rm \${REGISTRY_URL:-ghcr.io}/pranesh-rpo/kaify-helper:\${LATEST_HELPER_VERSION} bash -c \"LATEST_IMAGE=\${LATEST_IMAGE} docker compose --env-file /data/kaify/source/.env -f /data/kaify/source/docker-compose.yml -f /data/kaify/source/docker-compose.prod.yml -f /data/kaify/source/docker-compose.custom.yml up -d --remove-orphans --wait --wait-timeout 60\" >>\"\$LOGFILE\" 2>&1
+        docker run -v /data/kaify/source:/data/kaify/source -v /var/run/docker.sock:/var/run/docker.sock \${DOCKER_CONFIG_MOUNT} --rm \${REGISTRY_URL:-ghcr.io}/coollabsio/coolify-helper:\${LATEST_HELPER_VERSION} bash -c \"LATEST_IMAGE=\${LATEST_IMAGE} docker compose --env-file /data/kaify/source/.env -f /data/kaify/source/docker-compose.yml -f /data/kaify/source/docker-compose.prod.yml -f /data/kaify/source/docker-compose.custom.yml up -d --remove-orphans --wait --wait-timeout 60\" >>\"\$LOGFILE\" 2>&1
     else
         log 'Using standard docker-compose configuration'
         log 'Running docker compose up...'
-        docker run -v /data/kaify/source:/data/kaify/source -v /var/run/docker.sock:/var/run/docker.sock \${DOCKER_CONFIG_MOUNT} --rm \${REGISTRY_URL:-ghcr.io}/pranesh-rpo/kaify-helper:\${LATEST_HELPER_VERSION} bash -c \"LATEST_IMAGE=\${LATEST_IMAGE} docker compose --env-file /data/kaify/source/.env -f /data/kaify/source/docker-compose.yml -f /data/kaify/source/docker-compose.prod.yml up -d --remove-orphans --wait --wait-timeout 60\" >>\"\$LOGFILE\" 2>&1
+        docker run -v /data/kaify/source:/data/kaify/source -v /var/run/docker.sock:/var/run/docker.sock \${DOCKER_CONFIG_MOUNT} --rm \${REGISTRY_URL:-ghcr.io}/coollabsio/coolify-helper:\${LATEST_HELPER_VERSION} bash -c \"LATEST_IMAGE=\${LATEST_IMAGE} docker compose --env-file /data/kaify/source/.env -f /data/kaify/source/docker-compose.yml -f /data/kaify/source/docker-compose.prod.yml up -d --remove-orphans --wait --wait-timeout 60\" >>\"\$LOGFILE\" 2>&1
     fi
     log 'Docker compose up completed'
 
