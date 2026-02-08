@@ -466,13 +466,13 @@ class ByHetzner extends Component
         // Normalize server name to lowercase for RFC 1123 compliance
         $normalizedServerName = strtolower(trim($this->server_name));
 
-        // Prepare SSH keys array: Coolify key + user-selected Hetzner keys
+        // Prepare SSH keys array: Kaify key + user-selected Hetzner keys
         $sshKeys = array_merge(
-            [$sshKeyId], // Coolify key (always included)
+            [$sshKeyId], // Kaify key (always included)
             $this->selectedHetznerSshKeyIds // User-selected Hetzner keys
         );
 
-        // Remove duplicates in case the Coolify key was also selected
+        // Remove duplicates in case the Kaify key was also selected
         $sshKeys = array_unique($sshKeys);
         $sshKeys = array_values($sshKeys); // Re-index array
 
@@ -544,7 +544,7 @@ class ByHetzner extends Component
                 throw new \Exception('No public IP address available. Enable at least one of IPv4 or IPv6.');
             }
 
-            // Create server in Coolify database
+            // Create server in Kaify database
             $server = Server::create([
                 'name' => $this->server_name,
                 'ip' => $ipAddress,

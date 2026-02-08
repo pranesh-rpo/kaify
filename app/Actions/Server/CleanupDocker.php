@@ -37,8 +37,8 @@ class CleanupDocker
         $applicationCleanupLog = $this->cleanupApplicationImages($server, $applications);
         $cleanupLog = array_merge($cleanupLog, $applicationCleanupLog);
 
-        // Build image prune command that excludes application images and current Coolify infrastructure images
-        // This ensures we clean up non-Coolify images while preserving rollback images and current helper/realtime images
+        // Build image prune command that excludes application images and current Kaify infrastructure images
+        // This ensures we clean up non-Kaify images while preserving rollback images and current helper/realtime images
         // Note: Only the current version is protected; old versions will be cleaned up by explicit commands below
         // We pass the version strings so all registry variants are protected (ghcr.io, docker.io, no prefix)
         $imagePruneCmd = $this->buildImagePruneCommand(
@@ -99,7 +99,7 @@ class CleanupDocker
             return preg_replace('/([.\\\\+*?\[\]^$(){}|])/', '\\\\$1', $repo);
         })->implode('|');
 
-        // Build grep pattern to exclude Coolify infrastructure images (current version only)
+        // Build grep pattern to exclude Kaify infrastructure images (current version only)
         // This pattern matches the image name regardless of registry prefix:
         // - ghcr.io/coollabsio/coolify-helper:1.0.12
         // - docker.io/coollabsio/coolify-helper:1.0.12
@@ -111,7 +111,7 @@ class CleanupDocker
 
         // Delete unused images that:
         // - Are not application images (don't match app repos)
-        // - Are not current Coolify infrastructure images (any registry)
+        // - Are not current Kaify infrastructure images (any registry)
         // - Don't have coolify.managed=true label
         // Images in use by containers will fail silently with docker rmi
         // Pattern matches both uuid:tag and uuid_servicename:tag (Docker Compose with build)

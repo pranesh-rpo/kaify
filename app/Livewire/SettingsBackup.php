@@ -73,7 +73,7 @@ class SettingsBackup extends Component
         $this->s3s = $s3s;
     }
 
-    public function addCoolifyDatabase()
+    public function addKaifyDatabase()
     {
         try {
             $server = Server::findOrFail(0);
@@ -85,7 +85,7 @@ class SettingsBackup extends Component
             $this->database = StandalonePostgresql::create([
                 'id' => 0,
                 'name' => 'coolify-db',
-                'description' => 'Coolify database',
+                'description' => 'Kaify database',
                 'postgres_user' => $postgres_user,
                 'postgres_password' => $postgres_password,
                 'postgres_db' => $postgres_db,

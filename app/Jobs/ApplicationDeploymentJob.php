@@ -2553,7 +2553,7 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
         // Always use .env file
         $docker_compose['services'][$this->container_name]['env_file'] = ['.env'];
 
-        // Only add Coolify healthcheck if no custom HEALTHCHECK found in Dockerfile
+        // Only add Kaify healthcheck if no custom HEALTHCHECK found in Dockerfile
         // If custom_healthcheck_found is true, the Dockerfile's HEALTHCHECK will be used
         // If healthcheck is disabled, no healthcheck will be added
         if (! $this->application->custom_healthcheck_found && ! $this->application->isHealthcheckDisabled()) {
@@ -2856,9 +2856,9 @@ class ApplicationDeploymentJob implements ShouldBeEncrypted, ShouldQueue
 
     private function build_image()
     {
-        // Add Coolify related variables to the build args/secrets
+        // Add Kaify related variables to the build args/secrets
         if ($this->dockerBuildkitSupported) {
-            // Coolify variables are already included in the secrets from generate_build_env_variables
+            // Kaify variables are already included in the secrets from generate_build_env_variables
             // build_secrets is already a string at this point
         } else {
             // Traditional build args approach - generate COOLIFY_ variables locally
@@ -3220,7 +3220,7 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf");
             } else {
                 if ($this->application->dockerfile || $this->application->build_pack === 'dockerfile' || $this->application->build_pack === 'dockerimage') {
                     $this->application_deployment_queue->addLogEntry('----------------------------------------');
-                    $this->application_deployment_queue->addLogEntry("WARNING: Dockerfile or Docker Image based deployment detected. The healthcheck needs a curl or wget command to check the health of the application. Please make sure that it is available in the image or turn off healthcheck on Coolify's UI.");
+                    $this->application_deployment_queue->addLogEntry("WARNING: Dockerfile or Docker Image based deployment detected. The healthcheck needs a curl or wget command to check the health of the application. Please make sure that it is available in the image or turn off healthcheck on Kaify's UI.");
                     $this->application_deployment_queue->addLogEntry('----------------------------------------');
                 }
                 $this->application_deployment_queue->addLogEntry('New container is not healthy, rolling back to the old container.');
@@ -3514,7 +3514,7 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf");
                     $argsToInsert->push("ARG {$env->key}={$env->real_value}");
                 }
             }
-            // Add Coolify variables as ARGs
+            // Add Kaify variables as ARGs
             if ($this->coolify_variables) {
                 $coolify_vars = collect(explode(' ', trim($this->coolify_variables)))
                     ->filter()
@@ -3536,7 +3536,7 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf");
                     $argsToInsert->push("ARG {$env->key}={$env->real_value}");
                 }
             }
-            // Add Coolify variables as ARGs
+            // Add Kaify variables as ARGs
             if ($this->coolify_variables) {
                 $coolify_vars = collect(explode(' ', trim($this->coolify_variables)))
                     ->filter()

@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(10) }} > Sentinel | Coolify
+        {{ data_get_str($server, 'name')->limit(10) }} > Sentinel | Kaify
     </x-slot>
     <livewire:server.navbar :server="$server" />
     <div class="flex flex-col h-full gap-8 sm:flex-row">
@@ -86,8 +86,8 @@
                         </div>
 
                         <x-forms.input canGate="update" :canResource="$server" id="sentinelCustomUrl" required
-                            label="Coolify URL"
-                            helper="URL to your Coolify instance. If it is empty that means you do not have a FQDN set for your Coolify instance." />
+                            label="Kaify URL"
+                            helper="URL to your Kaify instance. If it is empty that means you do not have a FQDN set for your Kaify instance." />
 
                         <div class="flex flex-col gap-2">
                             <div class="flex flex-wrap gap-2 sm:flex-nowrap">

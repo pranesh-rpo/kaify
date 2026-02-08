@@ -32,30 +32,30 @@ class CheckForUpdatesJob implements ShouldBeEncrypted, ShouldQueue
 
                 // Read existing cached version
                 $existingVersions = null;
-                $existingCoolifyVersion = null;
+                $existingKaifyVersion = null;
                 if (File::exists(base_path('versions.json'))) {
                     $existingVersions = json_decode(File::get(base_path('versions.json')), true);
-                    $existingCoolifyVersion = data_get($existingVersions, 'coolify.v4.version');
+                    $existingKaifyVersion = data_get($existingVersions, 'coolify.v4.version');
                 }
 
                 // Determine the BEST version to use (CDN, cache, or current)
                 $bestVersion = $latest_version;
 
                 // Check if cache has newer version than CDN
-                if ($existingCoolifyVersion && version_compare($existingCoolifyVersion, $bestVersion, '>')) {
-                    Log::warning('CDN served older Coolify version than cache', [
+                if ($existingKaifyVersion && version_compare($existingKaifyVersion, $bestVersion, '>')) {
+                    Log::warning('CDN served older Kaify version than cache', [
                         'cdn_version' => $latest_version,
-                        'cached_version' => $existingCoolifyVersion,
+                        'cached_version' => $existingKaifyVersion,
                         'current_version' => $current_version,
                     ]);
-                    $bestVersion = $existingCoolifyVersion;
+                    $bestVersion = $existingKaifyVersion;
                 }
 
                 // CRITICAL: Never allow bestVersion to be older than currently running version
                 if (version_compare($bestVersion, $current_version, '<')) {
                     Log::warning('Version downgrade prevented in CheckForUpdatesJob', [
                         'cdn_version' => $latest_version,
-                        'cached_version' => $existingCoolifyVersion,
+                        'cached_version' => $existingKaifyVersion,
                         'current_version' => $current_version,
                         'attempted_best' => $bestVersion,
                         'using' => $current_version,
@@ -73,7 +73,7 @@ class CheckForUpdatesJob implements ShouldBeEncrypted, ShouldQueue
                 // Invalidate cache to ensure fresh data is loaded
                 invalidate_versions_cache();
 
-                // Only mark new version available if Coolify version actually increased
+                // Only mark new version available if Kaify version actually increased
                 if (version_compare($latest_version, $current_version, '>')) {
                     // New version available
                     $settings->update(['new_version_available' => true]);

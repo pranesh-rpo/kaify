@@ -33,7 +33,7 @@ class PublicGitRepository extends Component
 
     public bool $isStatic = false;
 
-    public bool $checkCoolifyConfig = true;
+    public bool $checkKaifyConfig = true;
 
     public ?string $publish_directory = null;
 
@@ -362,7 +362,7 @@ class PublicGitRepository extends Component
             $fqdn = generateUrl(server: $destination->server, random: $application->uuid);
             $application->fqdn = $fqdn;
             $application->save();
-            if ($this->checkCoolifyConfig) {
+            if ($this->checkKaifyConfig) {
                 // $config = loadConfigFromGit($this->repository_url, $this->git_branch, $this->base_directory, $this->query['server_id'], auth()->user()->currentTeam()->id);
                 // if ($config) {
                 //     $application->setConfig($config);

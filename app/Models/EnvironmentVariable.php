@@ -154,7 +154,7 @@ class EnvironmentVariable extends BaseModel
         );
     }
 
-    protected function isCoolify(): Attribute
+    protected function isKaify(): Attribute
     {
         return Attribute::make(
             get: function () {

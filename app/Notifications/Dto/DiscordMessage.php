@@ -48,7 +48,7 @@ class DiscordMessage
     {
         $footerText = 'Kaify v'.config('constants.kaify.version');
         if (isCloud()) {
-            $footerText = 'Coolify Cloud';
+            $footerText = 'Kaify Cloud';
         }
         $payload = [
             'embeds' => [

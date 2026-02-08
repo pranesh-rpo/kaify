@@ -69,12 +69,12 @@
                     @if (!isCloud())
                         <div class="w-48">
                             <x-forms.checkbox canGate="update" :canResource="$github_app" label="System Wide?"
-                                helper="If checked, this GitHub App will be available for everyone in this Coolify instance."
+                                helper="If checked, this GitHub App will be available for everyone in this Kaify instance."
                                 instantSave id="isSystemWide" />
                         </div>
                         @if ($isSystemWide)
                             <x-callout type="warning" title="Not Recommended">
-                                System-wide GitHub Apps are shared across all teams on this Coolify instance. This means any team can use this GitHub App to deploy applications from your repositories. For better security and isolation, it's recommended to create team-specific GitHub Apps instead.
+                                System-wide GitHub Apps are shared across all teams on this Kaify instance. This means any team can use this GitHub App to deploy applications from your repositories. For better security and isolation, it's recommended to create team-specific GitHub Apps instead.
                             </x-callout>
                         @endif
                     @endif
@@ -241,7 +241,7 @@
                         @if (!isCloud() || isDev())
                             <div class="flex flex-col sm:flex-row items-start sm:items-end gap-2">
                                 <x-forms.select wire:model.live='webhook_endpoint' label="Webhook Endpoint"
-                                    helper="All Git webhooks will be sent to this endpoint. <br><br>If you would like to use domain instead of IP address, set your Coolify instance's FQDN in the Settings menu.">
+                                    helper="All Git webhooks will be sent to this endpoint. <br><br>If you would like to use domain instead of IP address, set your Kaify instance's FQDN in the Settings menu.">
                                     @if ($ipv4)
                                         <option value="{{ $ipv4 }}">Use {{ $ipv4 }}</option>
                                     @endif

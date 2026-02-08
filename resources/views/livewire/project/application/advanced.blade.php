@@ -21,7 +21,7 @@
             <x-forms.checkbox helper="Disable Docker build cache on every deployment." instantSave
                 id="disableBuildCache" label="Disable Build Cache" canGate="update" :canResource="$application" />
             <x-forms.checkbox
-                helper="When enabled, Coolify automatically adds ARG statements to your Dockerfile for build-time variables. Disable this if you manage ARGs manually in your Dockerfile to preserve Docker build cache."
+                helper="When enabled, Kaify automatically adds ARG statements to your Dockerfile for build-time variables. Disable this if you manage ARGs manually in your Dockerfile to preserve Docker build cache."
                 instantSave id="injectBuildArgsToDockerfile" label="Inject Build Args to Dockerfile" canGate="update"
                 :canResource="$application" />
             <x-forms.checkbox
@@ -52,7 +52,7 @@
             @if ($application->build_pack === 'dockercompose')
                 <h3>Docker Compose</h3>
                 <x-forms.checkbox instantSave id="isRawComposeDeploymentEnabled" label="Raw Compose Deployment"
-                    helper="WARNING: Advanced use cases only. Your docker compose file will be deployed as-is. Nothing is modified by Coolify. You need to configure the proxy parts. More info in the <a class='underline dark:text-white' href='https://coolify.io/docs/knowledge-base/docker/compose#raw-docker-compose-deployment'>documentation.</a>"
+                    helper="WARNING: Advanced use cases only. Your docker compose file will be deployed as-is. Nothing is modified by Kaify. You need to configure the proxy parts. More info in the <a class='underline dark:text-white' href='https://coolify.io/docs/knowledge-base/docker/compose#raw-docker-compose-deployment'>documentation.</a>"
                     canGate="update" :canResource="$application" />
             @endif
             <h3 class="pt-4">Container Names</h3>
@@ -72,7 +72,7 @@
             @if ($application->build_pack === 'dockercompose')
                 <h3 class="pt-4">Network</h3>
                 <x-forms.checkbox instantSave id="isConnectToDockerNetworkEnabled" label="Connect To Predefined Network"
-                    helper="By default, you do not reach the Coolify defined networks.<br>Starting a docker compose based resource will have an internal network. <br>If you connect to a Coolify defined network, you maybe need to use different internal DNS names to connect to a resource.<br><br>For more information, check <a class='underline dark:text-white' target='_blank' href='https://coolify.io/docs/knowledge-base/docker/compose#connect-to-predefined-networks'>this</a>."
+                    helper="By default, you do not reach the Kaify defined networks.<br>Starting a docker compose based resource will have an internal network. <br>If you connect to a Kaify defined network, you maybe need to use different internal DNS names to connect to a resource.<br><br>For more information, check <a class='underline dark:text-white' target='_blank' href='https://coolify.io/docs/knowledge-base/docker/compose#connect-to-predefined-networks'>this</a>."
                     canGate="update" :canResource="$application" />
             @endif
             <h3 class="pt-4">Logs</h3>

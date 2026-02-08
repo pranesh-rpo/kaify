@@ -1,13 +1,13 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Coolify",
+        "title": "Kaify",
         "version": "0.1"
     },
     "servers": [
         {
             "url": "https:\/\/app.coolify.io\/api\/v1",
-            "description": "Coolify Cloud API. Change the host to your own instance if you are self-hosting."
+            "description": "Kaify Cloud API. Change the host to your own instance if you are self-hosting."
         }
     ],
     "paths": {
@@ -7191,7 +7191,7 @@
                     "Hetzner"
                 ],
                 "summary": "Create Hetzner Server",
-                "description": "Create a new server on Hetzner and register it in Coolify.",
+                "description": "Create a new server on Hetzner and register it in Kaify.",
                 "operationId": "create-hetzner-server",
                 "requestBody": {
                     "description": "Hetzner server creation parameters",
@@ -7326,7 +7326,7 @@
         "\/version": {
             "get": {
                 "summary": "Version",
-                "description": "Get Coolify version.",
+                "description": "Get Kaify version.",
                 "operationId": "version",
                 "responses": {
                     "200": {
@@ -10546,7 +10546,7 @@
                     },
                     "compose_parsing_version": {
                         "type": "string",
-                        "description": "How Coolify parse the compose file."
+                        "description": "How Kaify parse the compose file."
                     },
                     "custom_nginx_configuration": {
                         "type": "string",
@@ -11015,7 +11015,7 @@
                     },
                     "docker_compose": {
                         "type": "string",
-                        "description": "The docker-compose.yml file that is parsed and modified by Coolify."
+                        "description": "The docker-compose.yml file that is parsed and modified by Kaify."
                     },
                     "destination_type": {
                         "type": "string",
