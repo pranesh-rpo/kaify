@@ -768,7 +768,7 @@ curl -fsSL -L $CDN/docker-compose.prod.yml -o /data/kaify/source/docker-compose.
 PID2=$!
 curl -fsSL -L $CDN/.env.production -o /data/kaify/source/.env.production &
 PID3=$!
-curl -fsSL -L $CDN/upgrade.sh -o /data/kaify/source/upgrade.sh &
+curl -fsSL -L $CDN/scripts/upgrade.sh -o /data/kaify/source/upgrade.sh &
 PID4=$!
 
 # Wait for all downloads to complete and check for errors
